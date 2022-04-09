@@ -32,10 +32,10 @@ Juny Company라는 가상의 회사 내에서 개발자 직원들이 이용할 �
 **●[\[BackEnd\]\[Node.js\]\[nest.js-PJ\] 사내 개발자 커뮤니티 서비스 - 초기 구성(Pipe, TypeORM, Configuration, Swagger, Logger)](https://junyharang.tistory.com/271)**
 <br><br>
 
-<!-- #### ✍️ 게시판(Board) - CRUD -->
+#### ✍️ 게시판(Board) - CRUD
 
-<!-- **●[\[BackEnd\]\[Maven-PJ\] 개발자 커뮤니티 서비스 - 게시판 만들기 : 글 등록(작성) / 수정](https://junyharang.tistory.com/210)** -->
-<!-- <br> -->
+**●[\[BackEnd\]\[Node.js\]\[nest.js-PJ\] 사내 개발자 커뮤니티 서비스 - 게시판 만들기 : 초기 구성(Entity, Controller, Module, Repository, Service)](https://junyharang.tistory.com/274)**
+<br><br>
 
 <!-- **●[\[BackEnd\]\[Maven-PJ\] 개발자 커뮤니티 서비스 - 게시판 만들기 : 목록 조회](https://junyharang.tistory.com/218)** -->
 <!-- <br> -->
