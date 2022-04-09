@@ -85,8 +85,8 @@ Juny Company라는 가상의 회사 내에서 개발자 직원들이 이용할 �
 
 #### 🤔 내가 만난 Exception
 
-<!-- **●[\[Exception 정리\] org.apache.ibatis.binding.BindingException: Invalid bound statement (not found)](https://junyharang.tistory.com/213)** -->
-<!-- <br> -->
+**●[\[Node.js\]\[Nest.js\] ERROR \[ExceptionHandler\] No metadata for \"\{EntityName\}\" was found.](https://junyharang.tistory.com/275)**
+<br>
 <!-- **●[\[Vue.js\]\[Spring\] Post Data 전송 간 null값 전송 문제](https://junyharang.tistory.com/251)** -->
 
 <br><br><br>
