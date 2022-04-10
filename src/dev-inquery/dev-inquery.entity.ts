@@ -19,7 +19,7 @@ import {SecretAtStatus} from "./dev-inquery.secretat.status.enum";
     @PrimaryGeneratedColumn() inqrySn: number;
 
     @Column() inqryCn: string;
-    @Column() secretAt: SecretAtStatus.PUBLIC;     // 비밀글 여부 기본값 '공개글'
+    @Column() secretAt: SecretAtStatus;     // 비밀글 여부
     @Column() answerAt: string;
     @Column() answerCn: string;
     @Column() answerDt: string;
