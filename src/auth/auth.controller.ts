@@ -1,13 +1,14 @@
 import {Body, Controller, HttpStatus, Logger, Post, Res, ValidationPipe} from '@nestjs/common';
 import {ApiCreatedResponse, ApiOperation, ApiTags} from "@nestjs/swagger";
 import {AuthService} from "./auth.service";
-import {AuthCredentialDto} from "./dto/auth-credential.dto";
+import {AuthCredentialDto} from "./dto/join/auth-credential.dto";
 import {User} from "./user.entity";
 import {Response} from "express";
-import {AuthDuplicateByUserIdDto} from "./dto/auth.duplicate-by-user-id.dto";
-import {AuthDuplicateByUserNicknameDto} from "./dto/auth.duplicate-by-user-nickname.dto";
-import {AuthDuplicateByUserEmailDto} from "./dto/auth.duplicate-by-user-email.dto";
-import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-phone-number.dto";
+import {AuthDuplicateByUserIdDto} from "./dto/join/auth.duplicate-by-user-id.dto";
+import {AuthDuplicateByUserNicknameDto} from "./dto/join/auth.duplicate-by-user-nickname.dto";
+import {AuthDuplicateByUserEmailDto} from "./dto/join/auth.duplicate-by-user-email.dto";
+import {AuthDuplicateByUserPhoneNumberDto} from "./dto/join/auth.duplicate-by-user-phone-number.dto";
+import {AuthSigninRequestDto} from "./dto/login/auth.signin.request.dto";
 
 /**
  * 회원 관련 Controller
@@ -92,7 +93,7 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
 
     @Post('/signup') async signUp(@Body(ValidationPipe) authcredentialDTO : AuthCredentialDto, @Res() res: Response) {
 
-        this.logger.log("AuthController의 signUp(@Body() authcredentialDTO : AuthCredentialDto)이 동작 하였습니다!");
+        this.logger.log("AuthController의 signUp(@Body(ValidationPipe) authcredentialDTO : AuthCredentialDto, @Res() res: Response)이 동작 하였습니다!");
         this.logger.log(`Client에서 전달 된 값 : ${authcredentialDTO}`);
         this.logger.log(`authService.signUp(authcredentialDTO)를 호출하여 비즈니스 로직을 처리하겠습니다!`);
 
@@ -101,5 +102,21 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
         return res.status(HttpStatus.CREATED).json(user);
 
     }   // signUp(@Body() authcredentialDTO : AuthCredentialDto) 끝
+
+    @ApiOperation({ summary : 'Login API', description: '회원 인증 처리를 합니다.' })
+    @ApiCreatedResponse({ description : 'Login 성공 하였습니다!'})
+    
+    @Post('/signin')
+    async signIn(@Body(ValidationPipe) authSignInRequestDTO: AuthSigninRequestDto, @Res() res: Response) {
+
+        this.logger.log("AuthController의 signIn(@Body(ValidationPipe) authSignInRequestDTO : AuthSigninRequestDto, @Res() res: Response)이 동작 하였습니다!");
+        this.logger.log(`Client에서 전달 된 값 : ${authSignInRequestDTO}`);
+        this.logger.log(`authService.signUp(authcredentialDTO)를 호출하여 비즈니스 로직을 처리하겠습니다!`);
+
+        const loginUser: { messageKo: string; messageEn: string; accessToken: string; statusCode: number } = await this.authService.signIn(authSignInRequestDTO);
+
+        return res.status(HttpStatus.OK).json(loginUser);
+
+    }   // signIn(@Body(ValidationPipe) authSignInRequestDTO: AuthSigninRequestDto, @Res() res: Response) 끝
 
 }  // class 끝

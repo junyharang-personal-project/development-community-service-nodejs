@@ -58,7 +58,7 @@ Juny Company라는 가상의 회사 내에서 개발자 직원들이 이용할 �
 
 <br>
 
-**●[\[BackEnd\]\[Node.js\]\[Nest.js\] 사내 개발자 커뮤니티 서비스 - 로그인]()**
+**●[\[BackEnd\]\[Node.js\]\[Nest.js\] 사내 개발자 커뮤니티 서비스 - JWT를 이용한 Login](https://junyharang.tistory.com/280)**
 
 <br><br>
 
@@ -83,9 +83,15 @@ Juny Company라는 가상의 회사 내에서 개발자 직원들이 이용할 �
 **●[\[Node.js\]\[Nest.js\] Configuration(설정)](https://junyharang.tistory.com/269)**
 <br>
 **●[\[Node.js\]\[Nest.js\] TypeORM](https://junyharang.tistory.com/270)**
+<br>
+**●[\[Node.js\]\[Nest.js\] Logger 기능] TypeORM](https://junyharang.tistory.com/272)**
+<br>
+**●[\[JavaScript\] Promise와 async 그리고 await](https://junyharang.tistory.com/276)**
+<br>
+**●[\[Nest.js\] API 설계 - 요청, 응답 객체 (Request, Response Object)](https://junyharang.tistory.com/277)**
+<br>
+**●[\[정보보안\] JWT(JSON Web Token) 이란?](https://junyharang.tistory.com/279)**
 <br><br>
-
-
 
 #### 🤔 내가 만난 Exception
 

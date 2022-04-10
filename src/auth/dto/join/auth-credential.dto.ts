@@ -10,7 +10,7 @@ import {ApiProperty} from "@nestjs/swagger";
  * </pre>
  *
  * @author 주니하랑
- * @version 1.0.0, 1.0.1, 2022.04.10 유효성 검사를 위한 Decorator 추가
+ * @version 1.0.1, 2022.04.10 유효성 검사를 위한 Decorator 추가
  * @see <a href="https://www.inflearn.com/course/%EB%94%B0%EB%9D%BC%ED%95%98%EB%8A%94-%EB%84%A4%EC%8A%A4%ED%8A%B8-%EC%A0%9C%EC%9D%B4%EC%97%90%EC%8A%A4"></a>
  */
 

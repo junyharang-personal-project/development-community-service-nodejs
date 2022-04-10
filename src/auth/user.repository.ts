@@ -1,12 +1,22 @@
 import {EntityRepository, Repository} from "typeorm";
 import {User} from "./user.entity";
-import {AuthCredentialDto} from "./dto/auth-credential.dto";
-import {ConflictException, InternalServerErrorException, Logger} from "@nestjs/common";
-import {AuthDuplicateByUserIdDto} from "./dto/auth.duplicate-by-user-id.dto";
-import {AuthDuplicateByUserNicknameDto} from "./dto/auth.duplicate-by-user-nickname.dto";
-import {AuthDuplicateByUserEmailDto} from "./dto/auth.duplicate-by-user-email.dto";
-import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-phone-number.dto";
+import {AuthCredentialDto} from "./dto/join/auth-credential.dto";
+import {
+    BadRequestException,
+    ConflictException,
+    InternalServerErrorException,
+    Logger,
+    UnauthorizedException
+} from "@nestjs/common";
+import {AuthDuplicateByUserIdDto} from "./dto/join/auth.duplicate-by-user-id.dto";
+import {AuthDuplicateByUserNicknameDto} from "./dto/join/auth.duplicate-by-user-nickname.dto";
+import {AuthDuplicateByUserEmailDto} from "./dto/join/auth.duplicate-by-user-email.dto";
+import {AuthDuplicateByUserPhoneNumberDto} from "./dto/join/auth.duplicate-by-user-phone-number.dto";
 import * as bcrypt from "bcryptjs";
+import {JwtService} from "@nestjs/jwt";
+import {AuthSigninRequestDto} from "./dto/login/auth.signin.request.dto";
+import {InjectRepository} from "@nestjs/typeorm";
+import {AuthService} from "./auth.service";
 
 
 /**

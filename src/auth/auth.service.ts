@@ -1,13 +1,17 @@
-import {Injectable, Logger} from '@nestjs/common';
+import {BadRequestException, Injectable, InternalServerErrorException, Logger} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {UserRepository} from "./user.repository";
-import {AuthCredentialDto} from "./dto/auth-credential.dto";
-import {User} from "./user.entity";
-import {AuthDuplicateByUserIdDto} from "./dto/auth.duplicate-by-user-id.dto";
-import {AuthDuplicateByUserNicknameDto} from "./dto/auth.duplicate-by-user-nickname.dto";
-import {AuthDuplicateByUserEmailDto} from "./dto/auth.duplicate-by-user-email.dto";
-import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-phone-number.dto";
+import {AuthCredentialDto} from "./dto/join/auth-credential.dto";
+import {AuthDuplicateByUserIdDto} from "./dto/join/auth.duplicate-by-user-id.dto";
+import {AuthDuplicateByUserNicknameDto} from "./dto/join/auth.duplicate-by-user-nickname.dto";
+import {AuthDuplicateByUserEmailDto} from "./dto/join/auth.duplicate-by-user-email.dto";
+import {AuthDuplicateByUserPhoneNumberDto} from "./dto/join/auth.duplicate-by-user-phone-number.dto";
+import {JwtService} from "@nestjs/jwt";
+import {AuthSigninRequestDto} from "./dto/login/auth.signin.request.dto";
+import * as bcrypt from "bcryptjs";
+import * as config from 'config';
 
+const jwtConfig = config.get('jwt');
 /**
  * 회원 관련 Service
  * <pre>
@@ -15,19 +19,25 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
  *    주니하랑, 1.0.0, 2022.04.10 최초 작성
  *    주니하랑, 1.0.1, 2022.04.10 회원 가입을 위한 Method 구현
  *    주니하랑, 1.0.2, 2022.04.10 중복 확인을 위한 Method 구현(ID, 별명, Email, 핸드폰 번호)
+ *    주니하랑, 1.0.3, 2022.04.11 JWT를 이용한 Login 기능 구현
  * </pre>
  *
  * @author 주니하랑
- * @version 1.0.2, 2022.04.10 중복 확인을 위한 Method 구현(ID, 별명, Email, 핸드폰 번호)
+ * @version 1.0.3, 2022.04.11 JWT를 이용한 Login 기능 구현
  * @see <a href="https://www.inflearn.com/course/%EB%94%B0%EB%9D%BC%ED%95%98%EB%8A%94-%EB%84%A4%EC%8A%A4%ED%8A%B8-%EC%A0%9C%EC%9D%B4%EC%97%90%EC%8A%A4"></a>
  */
+
+
 
 @Injectable()
 export class AuthService {
 
+
+
     private logger = new Logger('auth.service.ts');
 
-    constructor(@InjectRepository(UserRepository) private userRepository : UserRepository) { }   // 생성자 끝
+    constructor(@InjectRepository(UserRepository)
+                private userRepository : UserRepository, private jwtService : JwtService) { }   // 생성자 끝
 
     /**
      * 회원 가입 전 등록된 ID 정보 인지 확인
@@ -120,4 +130,59 @@ export class AuthService {
         return this.userRepository.signUp(authCredentialDTO);
 
     }   // signUp(authCredentialDTO : AuthCredentialDto) 끝
+
+    /**
+     * Login Method
+     * @param authSignInRequestDTO - Cient에서 Login을 위해 작성한 내용이 담긴 DTO
+     * @see "https://www.inflearn.com/course/%EB%94%B0%EB%9D%BC%ED%95%98%EB%8A%94-%EB%84%A4%EC%8A%A4%ED%8A%B8-%EC%A0%9C%EC%9D%B4%EC%97%90%EC%8A%A4"
+     */
+
+    async signIn(authSignInRequestDTO : AuthSigninRequestDto): Promise<{ messageKo: string; messageEn: string; accessToken: string; statusCode: number }> {
+
+        const { username, password } = authSignInRequestDTO;
+
+        try {
+
+            const findByUserInfo = await this.userRepository.findOne({
+                select: ["username", "password"],
+
+                where: { username : username}
+            });
+
+            if (findByUserInfo && (await bcrypt.compare(password, findByUserInfo.password))) {
+
+                const payload = { username };
+
+                const accessToken = await this.jwtService.sign(payload);
+
+                return {
+                    statusCode: 200,
+                    messageKo: "로그인 성공!",
+                    messageEn: "OK",
+                    accessToken: accessToken,
+                };
+
+            } else {
+
+                this.logger.log("로그인 실패 하였습니다!");
+
+                return {
+                    statusCode: 400,
+                    messageKo: "로그인 실패 하였습니다!",
+                    messageEn: "Login Failed",
+                    accessToken : null,
+                };
+
+            }// if (signInUser && (await bcrypt.compare(password, signInUser.password))) 끝
+
+        } catch (error) {
+
+            this.logger.log("Login 처리하는 도 중 문제가 발생하였습니다");
+            this.logger.error(`Error 내용 : ${error}`);
+
+            throw new InternalServerErrorException('Server에 문제가 발생하였습니다! 관리자에게 문의해 주세요!');
+
+        } // try - catch 끝
+    }   // signIn(authSignInRequestDTO : AuthSigninRequestDto) 끝
+
 } // class 끝
