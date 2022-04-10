@@ -11,6 +11,7 @@ export const typeORMConfig: TypeOrmModuleOptions = {
     username: process.env.RDS_USERNAME || dbConfig.username,
     password: process.env.RDS_PASSWORD || dbConfig.password,
     database: process.env.RDS_DB_NAME || dbConfig.database,
+    logging : "all",
 
     //Entities to be loaded for this connection
     // Entity를 이용해서 DB Table 생성. 그러므로, Entity 파일이 어디 있는지 설정 필요
