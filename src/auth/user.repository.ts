@@ -1,12 +1,13 @@
-import {EntityRepository, getConnection, Repository} from "typeorm";
+import {EntityRepository, Repository} from "typeorm";
 import {User} from "./user.entity";
 import {AuthCredentialDto} from "./dto/auth-credential.dto";
 import {ConflictException, InternalServerErrorException, Logger} from "@nestjs/common";
 import {AuthDuplicateByUserIdDto} from "./dto/auth.duplicate-by-user-id.dto";
-import {options} from "tsconfig-paths/lib/options";
 import {AuthDuplicateByUserNicknameDto} from "./dto/auth.duplicate-by-user-nickname.dto";
 import {AuthDuplicateByUserEmailDto} from "./dto/auth.duplicate-by-user-email.dto";
 import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-phone-number.dto";
+import * as bcrypt from "bcryptjs";
+
 
 /**
  * 회원 관련 Repository
@@ -15,10 +16,11 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
  *    주니하랑, 1.0.0, 2022.04.10 최초 작성
  *    주니하랑, 1.0.1, 2022.04.10 회원 가입을 위한 Method 구현
  *    주니하랑, 1.0.2, 2022.04.10 중복 확인을 위한 Method 구현(ID, 별명, Email, 핸드폰 번호)
+ *    주니하랑, 1.0.3, 2022.04.11 회원 가입 시 비밀번호 암호화(Hash + Salt) 기능 구현
  * </pre>
  *
  * @author 주니하랑
- * @version 1.0.2, 2022.04.10 중복 확인을 위한 Method 구현(ID, 별명, Email, 핸드폰 번호)
+ * @version 1.0.3, 2022.04.11 회원 가입 시 비밀번호 암호화(Hash + Salt) 기능 구현
  * @see <a href="https://www.inflearn.com/course/%EB%94%B0%EB%9D%BC%ED%95%98%EB%8A%94-%EB%84%A4%EC%8A%A4%ED%8A%B8-%EC%A0%9C%EC%9D%B4%EC%97%90%EC%8A%A4"></a>
  */
 
@@ -224,8 +226,18 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
         this.logger.log("요청을 담은 DTO에 각 내용을 각각 상수형 변수에 담겠습니다!");
         const { username, password, nickname, userEmail, userPhone } = authCredentialDTO;
 
-        this.logger.log("상수형 변수 user에 각각의 상수형 변수를 담아 주겠습니다!");
-        const user = this.create({ username, password, nickname, userEmail, userPhone });
+        this.logger.log("이용자의 비밀번호를 암호화하면서 Salt 값을 합쳐주기 위한 salt 객체를 만들겠습니다.");
+        const salt = await bcrypt.genSalt();
+
+        this.logger.log(`Salt 값 확인 : ${salt}`);
+
+        this.logger.log("이용자의 비밀번호를 암호화하기 위해 bcrypt에 hash()를 호출하여 이용자의 비밀번호와 salt값을 전달하여 Hash 암호화 한 뒤 결과값을 hashedPassword에 담겠습니다.");
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        this.logger.log(`암호화 된 Password 값 확인 : ${hashedPassword}`);
+
+        this.logger.log("상수형 변수 user에 각각의 상수형 변수를 담아 객체를 생성 하겠습니다!");
+        const user = this.create({ username, password: hashedPassword, nickname, userEmail, userPhone });
 
         this.logger.log("save()를 호출하여 user객체를 전달하고, 이를 통해 Data Base에 Insert Query를 날리겠습니다!");
 
