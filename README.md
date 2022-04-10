@@ -84,7 +84,7 @@ Juny Company라는 가상의 회사 내에서 개발자 직원들이 이용할 �
 <br>
 **●[\[Node.js\]\[Nest.js\] TypeORM](https://junyharang.tistory.com/270)**
 <br>
-**●[\[Node.js\]\[Nest.js\] Logger 기능] TypeORM](https://junyharang.tistory.com/272)**
+**●[\[Node.js\]\[Nest.js\] Logger 기능](https://junyharang.tistory.com/272)**
 <br>
 **●[\[JavaScript\] Promise와 async 그리고 await](https://junyharang.tistory.com/276)**
 <br>
