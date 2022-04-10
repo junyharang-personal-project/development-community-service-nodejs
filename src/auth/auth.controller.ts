@@ -34,48 +34,56 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
     @ApiOperation({ summary : 'ID 중복 확인 API', description: 'ID 중복 확인 서비스 입니다.' })
     @ApiCreatedResponse({ description : '중복된 회원이 없습니다!'})
 
-    @Post('/duplicate/userid') async duplicateUserID(@Body(ValidationPipe) authDuplicateByUserIdDto : AuthDuplicateByUserIdDto): Promise<any> {
+    @Post('/duplicate/userid') async duplicateUserID(@Body(ValidationPipe) authDuplicateByUserIdDto : AuthDuplicateByUserIdDto, @Res() res: Response) {
 
         this.logger.log("AuthController의 duplicateUserID(@Body(ValidationPipe) authDuplicateByUserIdDto : AuthDuplicateByUserIdDto)이 동작 하였습니다!");
         this.logger.log(`authService.duplicateUserID(authDuplicateByUserIdDto)를 호출하여 비즈니스 로직을 처리하겠습니다!`);
 
-        return await this.authService.duplicateUserID(authDuplicateByUserIdDto);
+        const userIdDto : { messageKo: string; statusCode: number; data: User; messageEn: string } = await this.authService.duplicateUserID(authDuplicateByUserIdDto);
+
+        return res.status(HttpStatus.OK).json(userIdDto);
 
     }   // duplicateUserID(@Body(ValidationPipe) authDuplicateByUserIdDto : AuthDuplicateByUserIdDto) 끝
 
     @ApiOperation({ summary : '별명 중복 확인 API', description: '별명 중복 확인 서비스 입니다.' })
     @ApiCreatedResponse({ description : '중복된 회원이 없습니다!'})
 
-    @Post('/duplicate/nickname') async duplicateUserNickName(@Body(ValidationPipe) authDuplicateByUserNicknameDto : AuthDuplicateByUserNicknameDto): Promise<any> {
+    @Post('/duplicate/nickname') async duplicateUserNickName(@Body(ValidationPipe) authDuplicateByUserNicknameDto : AuthDuplicateByUserNicknameDto, @Res() res: Response) {
 
         this.logger.log("AuthController의 duplicateUserNickName(@Body(ValidationPipe) authDuplicateByUserNicknameDto : AuthDuplicateByUserNicknameDto)이 동작 하였습니다!");
         this.logger.log(`authService.duplicateUserNickName(duplicateByUserNicknameDto)를 호출하여 비즈니스 로직을 처리하겠습니다!`);
 
-        return await this.authService.duplicateUserNickName(authDuplicateByUserNicknameDto);
+        const UserNicknameDTO : { messageKo: string; statusCode: number; data: User; messageEn: string } = await this.authService.duplicateUserNickName(authDuplicateByUserNicknameDto);
+
+        return res.status(HttpStatus.OK).json(UserNicknameDTO);
 
     }   // duplicateUserNickName(@Body(ValidationPipe) authDuplicateByUserNicknameDto : AuthDuplicateByUserNicknameDto) 끝
 
     @ApiOperation({ summary : 'Email 중복 확인 API', description: 'Email 중복 확인 서비스 입니다.' })
     @ApiCreatedResponse({ description : '중복된 회원이 없습니다!'})
 
-    @Post('/duplicate/email') async duplicateUserEmail(@Body(ValidationPipe) authDuplicateByUserEmailDto : AuthDuplicateByUserEmailDto): Promise<any> {
+    @Post('/duplicate/email') async duplicateUserEmail(@Body(ValidationPipe) authDuplicateByUserEmailDto : AuthDuplicateByUserEmailDto, @Res() res: Response) {
 
         this.logger.log("AuthController의 duplicateUserEmail(@Body(ValidationPipe) authDuplicateByUserEmailDto : AuthDuplicateByUserEmailDto)이 동작 하였습니다!");
         this.logger.log(`authService.duplicateUserNickName(duplicateByUserNicknameDto)를 호출하여 비즈니스 로직을 처리하겠습니다!`);
 
-        return await this.authService.duplicateUserEmail(authDuplicateByUserEmailDto);
+        const UserEmailDTO : { messageKo: string; statusCode: number; data: User; messageEn: string } = await this.authService.duplicateUserEmail(authDuplicateByUserEmailDto);
+
+        return res.status(HttpStatus.OK).json(UserEmailDTO);
 
     }   // duplicateUserEmail(@Body(ValidationPipe) authDuplicateByUserEmailDto : AuthDuplicateByUserEmailDto) 끝
 
     @ApiOperation({ summary : '핸드폰 번호 중복 확인 API', description: '핸드폰 번호 중복 확인 서비스 입니다.' })
     @ApiCreatedResponse({ description : '중복된 회원이 없습니다!'})
 
-    @Post('/duplicate/phone-number') async duplicateUserPhoneNumber(@Body(ValidationPipe) authDuplicateByUserPhoneNumberDto : AuthDuplicateByUserPhoneNumberDto): Promise<any> {
+    @Post('/duplicate/phone-number') async duplicateUserPhoneNumber(@Body(ValidationPipe) authDuplicateByUserPhoneNumberDto : AuthDuplicateByUserPhoneNumberDto, @Res() res: Response) {
 
         this.logger.log("AuthController의 duplicateUserPhoneNumber(@Body(ValidationPipe) authDuplicateByUserPhoneNumberDto : AuthDuplicateByUserPhoneNumberDto)이 동작 하였습니다!");
         this.logger.log(`authService.duplicateUserNickName(duplicateByUserNicknameDto)를 호출하여 비즈니스 로직을 처리하겠습니다!`);
 
-        return await this.authService.duplicateUserPhoneNumber(authDuplicateByUserPhoneNumberDto);
+        const UserPhoneNumberDTO : { messageKo: string; statusCode: number; data: User; messageEn: string } = await this.authService.duplicateUserPhoneNumber(authDuplicateByUserPhoneNumberDto);
+
+        return res.status(HttpStatus.OK).json(UserPhoneNumberDTO);
 
     }   // duplicateUserPhoneNumber(@Body(ValidationPipe) authDuplicateByUserPhoneNumberDto : AuthDuplicateByUserPhoneNumberDto) 끝
 
@@ -88,7 +96,7 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
         this.logger.log(`Client에서 전달 된 값 : ${authcredentialDTO}`);
         this.logger.log(`authService.signUp(authcredentialDTO)를 호출하여 비즈니스 로직을 처리하겠습니다!`);
 
-        const user : User = await this.authService.signUp(authcredentialDTO);
+        const user : { messageKo: string; statusCode: number; data: User; messageEn: string } = await this.authService.signUp(authcredentialDTO);
 
         return res.status(HttpStatus.CREATED).json(user);
 

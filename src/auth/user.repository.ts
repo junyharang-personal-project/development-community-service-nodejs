@@ -33,7 +33,7 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
      * @see ""
      */
 
-    async duplicateUserID(authDuplicateByUserIdDto: AuthDuplicateByUserIdDto) {
+    async duplicateUserID(authDuplicateByUserIdDto: AuthDuplicateByUserIdDto): Promise<{ messageKo: string; statusCode: number; data: User; messageEn: string }> {
 
         this.logger.log("UserRepository의 duplicateUserID(authDuplicateByUserIdDto: AuthDuplicateByUserIdDto)이 호출 되었습니다!");
         this.logger.log(`Service로 부터 전달된 DTO 내용 : ${authDuplicateByUserIdDto.toString()}`);
@@ -54,9 +54,10 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
             this.logger.log("이미 존재하는 ID 입니다! 409 Code와 함께 \"이미 존재하는 값 입니다!\" 반환 하겠습니다!")
 
             return {
-                code: "409",
+                statusCode: 409,
                 messageKo: "이미 존재하는 값 입니다!",
                 messageEn: "Conflict",
+                data: findByUserID,
             };
 
         } else {
@@ -64,7 +65,7 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
             this.logger.log("중복 되는 값이 없습니다! 200 Code와 함께 \"사용 가능!\" 반환 하겠습니다!");
 
             return {
-                code: "200",
+                statusCode: 200,
                 messageKo: "사용 가능!",
                 messageEn: "OK",
                 data: findByUserID,
@@ -79,7 +80,7 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
      * @see ""
      */
 
-    async duplicateUserNickName(userNickName: AuthDuplicateByUserNicknameDto) {
+    async duplicateUserNickName(userNickName: AuthDuplicateByUserNicknameDto): Promise<{ messageKo: string; statusCode: number; data: User; messageEn: string }> {
 
         this.logger.log("UserRepository의 duplicateUserNickName(userNickName: AuthDuplicateByUserNicknameDto)이 호출 되었습니다!");
         this.logger.log(`DB에 Select()문을 통해 해당 별명이 존재하는지 검사 하겠습니다!`);
@@ -99,9 +100,10 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
             this.logger.log("이미 존재하는 별명 입니다! 409 Code와 함께 \"이미 존재하는 값 입니다!\" 반환 하겠습니다!")
 
             return {
-                code: "409",
+                statusCode: 409,
                 messageKo: "이미 존재하는 값 입니다!",
                 messageEn: "Conflict",
+                data: findByUserNickName,
             };
 
         } else {
@@ -109,7 +111,7 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
             this.logger.log("중복 되는 값이 없습니다! 200 Code와 함께 \"사용 가능!\" 반환 하겠습니다!");
 
             return {
-                code: "200",
+                statusCode: 200,
                 messageKo: "사용 가능!",
                 messageEn: "OK",
                 data: findByUserNickName,
@@ -124,7 +126,7 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
      * @see ""
      */
 
-    async duplicateUserEmail(authDuplicateByUserEmailDto: AuthDuplicateByUserEmailDto) {
+    async duplicateUserEmail(authDuplicateByUserEmailDto: AuthDuplicateByUserEmailDto): Promise<{ messageKo: string; statusCode: number; data: User; messageEn: string }> {
 
         this.logger.log("UserRepository의 duplicateUserEmail(userEmail: AuthDuplicateByUserEmailDto)이 호출 되었습니다!");
         this.logger.log(`DB에 Select()문을 통해 해당 Email이 존재하는지 검사 하겠습니다!`);
@@ -144,9 +146,10 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
             this.logger.log("이미 존재하는 별명 입니다! 409 Code와 함께 \"이미 존재하는 값 입니다!\" 반환 하겠습니다!")
 
             return {
-                code: "409",
+                statusCode: 409,
                 messageKo: "이미 존재하는 값 입니다!",
                 messageEn: "Conflict",
+                data: findByUserEmail,
             };
 
         } else {
@@ -154,7 +157,7 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
             this.logger.log("중복 되는 값이 없습니다! 200 Code와 함께 \"사용 가능!\" 반환 하겠습니다!");
 
             return {
-                code: "200",
+                statusCode: 200,
                 messageKo: "사용 가능!",
                 messageEn: "OK",
                 data: findByUserEmail,
@@ -169,7 +172,7 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
      * @see ""
      */
 
-    async duplicateUserPhoneNumber(userPhonNumber: AuthDuplicateByUserPhoneNumberDto) {
+    async duplicateUserPhoneNumber(userPhonNumber: AuthDuplicateByUserPhoneNumberDto): Promise<{ messageKo: string; statusCode: number; data: User; messageEn: string }> {
 
         this.logger.log("duplicateUserPhoneNumber(userPhonNumber: AuthDuplicateByUserPhoneNumberDto)이 호출 되었습니다!");
         this.logger.log(`DB에 Select()문을 통해 해당 Email이 존재하는지 검사 하겠습니다!`);
@@ -189,9 +192,10 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
             this.logger.log("이미 존재하는 핸드폰 번호 입니다! 409 Code와 함께 \"이미 존재하는 값 입니다!\" 반환 하겠습니다!")
 
             return {
-                code: "409",
+                statusCode: 409,
                 messageKo: "이미 존재하는 값 입니다!",
                 messageEn: "Conflict",
+                data: findByUserPhoneNumber,
             };
 
         } else {
@@ -199,7 +203,7 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
             this.logger.log("중복 되는 값이 없습니다! 200 Code와 함께 \"사용 가능!\" 반환 하겠습니다!");
 
             return {
-                code: "200",
+                statusCode: 200,
                 messageKo: "사용 가능!",
                 messageEn: "OK",
                 data: findByUserPhoneNumber,
@@ -213,7 +217,7 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
      * @see "https://www.inflearn.com/course/%EB%94%B0%EB%9D%BC%ED%95%98%EB%8A%94-%EB%84%A4%EC%8A%A4%ED%8A%B8-%EC%A0%9C%EC%9D%B4%EC%97%90%EC%8A%A4"
      */
 
-    async signUp(authCredentialDTO : AuthCredentialDto): Promise<User> {
+    async signUp(authCredentialDTO : AuthCredentialDto): Promise<{ messageKo: string; statusCode: number; data: User; messageEn: string }> {
 
         this.logger.log("UserRepository의 signUp(authCredentialDTO : AuthCredentialDto)이 호출 되었습니다!");
         this.logger.log(`Service로 부터 전달된 DTO 내용 : ${authCredentialDTO.toString()}`);
@@ -227,8 +231,16 @@ import {AuthDuplicateByUserPhoneNumberDto} from "./dto/auth.duplicate-by-user-ph
 
         try {
 
+            const successJoin = await this.save(user);
+
             this.logger.log("정상 동작 완료 하였습니다!");
-            return await this.save(user);
+
+            return {
+                statusCode: 201,
+                messageKo: "회원 가입 성공 하였습니다!",
+                messageEn: "OK",
+                data: successJoin,
+            };
 
         } catch (error) {
 
