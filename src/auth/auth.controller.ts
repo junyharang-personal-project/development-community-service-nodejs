@@ -1,4 +1,4 @@
-import {Body, Controller, HttpStatus, Logger, Post, Res, ValidationPipe} from '@nestjs/common';
+import {Body, Controller, HttpStatus, Logger, Post, Req, Res, UseGuards, ValidationPipe} from '@nestjs/common';
 import {ApiCreatedResponse, ApiOperation, ApiTags} from "@nestjs/swagger";
 import {AuthService} from "./auth.service";
 import {AuthCredentialDto} from "./dto/join/auth-credential.dto";
@@ -9,6 +9,8 @@ import {AuthDuplicateByUserNicknameDto} from "./dto/join/auth.duplicate-by-user-
 import {AuthDuplicateByUserEmailDto} from "./dto/join/auth.duplicate-by-user-email.dto";
 import {AuthDuplicateByUserPhoneNumberDto} from "./dto/join/auth.duplicate-by-user-phone-number.dto";
 import {AuthSigninRequestDto} from "./dto/login/auth.signin.request.dto";
+import {AuthGuard} from "@nestjs/passport";
+import {GetUser} from "../custom/user.object.mng.decorator";
 
 /**
  * 회원 관련 Controller
@@ -118,5 +120,12 @@ import {AuthSigninRequestDto} from "./dto/login/auth.signin.request.dto";
         return res.status(HttpStatus.OK).json(loginUser);
 
     }   // signIn(@Body(ValidationPipe) authSignInRequestDTO: AuthSigninRequestDto, @Res() res: Response) 끝
+
+    @Post('/test')
+    @UseGuards(AuthGuard())
+    test(@GetUser() user: User) {
+        // console.log('요청으로 들어온 값을 확인 합니다. 요청 값 : ', req);
+        console.log('요청으로 들어온 값을 확인 합니다. 요청 값의 회원 정보 : ', user);
+    }   // test(@GetUser() user: User) 끝
 
 }  // class 끝
