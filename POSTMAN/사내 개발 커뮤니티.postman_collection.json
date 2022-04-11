@@ -1,0 +1,517 @@
+{
+	"info": {
+		"_postman_id": "508cce3e-01cd-4ff3-9568-df85f793e6b7",
+		"name": "사내 개발 커뮤니티",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "지원",
+			"item": [
+				{
+					"name": "Q&A 게시판",
+					"item": [
+						{
+							"name": "답글",
+							"item": [
+								{
+									"name": "답글 등록 / 수정",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "  {\n  \"answerAt\": \"Y\",\n  \"answerCn\": \"답글 테스트 중!\",\n  \"answerUserSn\": 1,\n  \"inqrySn\": \"138\"\n  }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/support/dev-inqury/reply",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"support",
+												"dev-inqury",
+												"reply"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "답글 삭제",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/support/dev-inqury/reply/138",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"support",
+												"dev-inqury",
+												"reply",
+												"138"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "목록 조회",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"srchWord\": \"\",\n    \"srchType\": \"1\",\n    \"page\": 5,\n    \"perPageNum\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/support/devInquryList",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"support",
+										"devInquryList"
+									]
+								},
+								"description": "qna조회"
+							},
+							"response": []
+						},
+						{
+							"name": "상세 조회",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n      \"inqrySn\": 91\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/support/devInquryView",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"support",
+										"devInquryView"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "게시글 등록/수정",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"inqrySn\" : \"106\",\n\"inqrySj\": \"안녕하소!!\",\n\"inqryCn\": \"코딩은 정말 넘나 넘나 재밌어요!\",\n\"secretAt\": true\n}\n\n          ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/support/devInqury",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"support",
+										"devInqury"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "\b게시글 삭제",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"inqrySn\" : \"88\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/support/devInqury",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"support",
+										"devInqury"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "공지사항",
+					"item": [
+						{
+							"name": "http://localhost:8888/api/notice/noticeList",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"srchWord\": \"\",\n    \"srchType\": \"1\",\n    \"page\": 1,\n    \"perPageNum\": 6\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8888/api/notice/noticeList",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"api",
+										"notice",
+										"noticeList"
+									]
+								},
+								"description": "공지사항조회"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "회원 관련",
+			"item": [
+				{
+					"name": "회원 가입",
+					"item": [
+						{
+							"name": "회원 가입",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nickname\": \"주니하랑하히\",\n  \"password\": \"Juny123!@$\",\n  \"userEmail\": \"junyharang85923@gmail.com\",\n  \"userPhone\": \"01038384949\",\n  \"username\": \"junyharang1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/user/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ID 중복 정보 확인",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"#jiid\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/user/duplicate/userid",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user",
+										"duplicate",
+										"userid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "별명 중복 정보 확인",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nickname\": \"주니하랑1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/user/duplicate/nickname",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user",
+										"duplicate",
+										"nickname"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "\bEmail 중복 정보 확인",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userEmail\": \"juny@hanmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/user/duplicate/email",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user",
+										"duplicate",
+										"email"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "핸드폰 번호 중복 정보 확인",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userPhone\": \"0113343948\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/user/duplicate/phone-number",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user",
+										"duplicate",
+										"phone-number"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "로그인",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"Juny123!@$\",\n  \"username\": \"junyharang1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Access Token 재 발급",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX3BrIjoxMiwidXNlcl9yb2xlIjoiUk9MRV9VU0VSIiwidG9rZW5fbmFtZSI6IlJFRlJFU0ggVE9LRU4iLCJpYXQiOjE2NDg3MDg0ODgsImV4cCI6MTY0OTkxODA4OH0.46-spTGjizk4uSlRbRok-XIsaDa4aigcOuIho46VaS0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/user/reissue",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"reissue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "로그아웃",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX3BrIjoxMiwidXNlcl9yb2xlIjoiUk9MRV9VU0VSIiwidG9rZW5fbmFtZSI6IlJFRlJFU0ggVE9LRU4iLCJpYXQiOjE2NDg3MjkyMzYsImV4cCI6MTY0OTkzODgzNn0.3c12u_fphiHGoogvbcer0bZbNTWkYUx8q_l9A6IK6N4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/user/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Authentication",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imp1bnloYXJhbmcxMjM0IiwiaWF0IjoxNjQ5Njg3MDAzLCJleHAiOjE2NDk2OTA2MDN9.DOI1Le0Qei59mWNkOYQB9gxu-5GaRl7S2bFPOZ4r4zw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
