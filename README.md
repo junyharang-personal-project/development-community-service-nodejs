@@ -55,11 +55,14 @@ Juny Company라는 가상의 회사 내에서 개발자 직원들이 이용할 �
 #### 👨‍👩‍👧‍👦 회원 관련(User Management)
 
 **●[\[BackEnd\]\[Node.js\]\[Nest.js\] 사내 개발자 커뮤니티 서비스 - 회원 가입](https://junyharang.tistory.com/278)**
-
 <br>
-
 **●[\[BackEnd\]\[Node.js\]\[Nest.js\] 사내 개발자 커뮤니티 서비스 - JWT를 이용한 Login](https://junyharang.tistory.com/280)**
-
+<br>
+**●[\[BackEnd\]\[Node.js\]\[Nest.js\] 사내 개발자 커뮤니티 서비스 - Passport, JWT를 이용한 인가 처리](https://junyharang.tistory.com/282)**
+<br>
+**●[\[BackEnd\]\[Node.js\]\[Nest.js\] 사내 개발자 커뮤니티 서비스 - Passport, JWT를 이용한 인가 처리](https://junyharang.tistory.com/282)**
+<br>
+**●[\[BackEnd\]\[Node.js\]\[Nest.js\] 사내 개발자 커뮤니티 서비스 - Custom Decorator](https://junyharang.tistory.com/283)**
 <br><br>
 
 #### 📚부 록
