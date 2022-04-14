@@ -23,12 +23,11 @@ export  class RequestRegistDevInqueryDto extends BoardCommon{
     @IsNotEmpty() @IsString() private _secretAt : string;    // 게시글 비밀글 여부 (비밀글 : 'Y', 공개글 : 'N')
 
     private _fileSn : number;                                 // 파일 일련 번호
-    // private _crtrSn : number;
-
-
     private _inquryUserSn : number;
 
-    constructor(inqrySn: number, inqrySj: string, inqryCn: string, secretAt: string, inquryUserSn: number, fileSn : number) {
+    private _answerAt : string;
+
+    constructor(inqrySn: number, inqrySj: string, inqryCn: string, secretAt: string, inquryUserSn: number, fileSn : number, answerAt : string) {
         super();
         this._inqrySn = inqrySn;
         this._inqrySj = inqrySj;
@@ -36,6 +35,7 @@ export  class RequestRegistDevInqueryDto extends BoardCommon{
         this._secretAt = secretAt;
        this._inquryUserSn = inquryUserSn;
        this._fileSn = fileSn;
+       this._answerAt = answerAt;
     }   // 생성자 끝
 
     get inqrySn(): number {
@@ -84,5 +84,14 @@ export  class RequestRegistDevInqueryDto extends BoardCommon{
 
     set fileSn(value: number) {
         this._fileSn = value;
+    }
+
+
+    get answerAt(): string {
+        return this._answerAt;
+    }
+
+    set answerAt(value: string) {
+        this._answerAt = value;
     }
 }   // class 끝

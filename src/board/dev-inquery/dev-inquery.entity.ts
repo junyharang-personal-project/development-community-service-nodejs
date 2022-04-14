@@ -1,6 +1,13 @@
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {
+    BaseEntity,
+    Column,
+    CreateDateColumn,
+    Entity,
+    PrimaryColumn,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import {AnswerAtStatus} from "./dev-inquery.answer.status.enum";
-import {BoardCommon} from "../common/board.common";
 
 /**
  * Q&A 게시판 Model(Entity)
@@ -15,9 +22,11 @@ import {BoardCommon} from "../common/board.common";
  * @see <a href=""></a>
  */
 
-@Entity(`tb_com_inqry`) export class DevInqueryEntity extends BaseEntity{
+@Entity() export class DevInqueryEntity extends BaseEntity{
 
-    @PrimaryGeneratedColumn() inqrySn: number;      // 게시글 일련번호
+    @PrimaryGeneratedColumn()
+    // @PrimaryColumn('INQRY_SN')
+    inqrySn: number;      // 게시글 일련번호
 
     @Column() inqryUserSn : number;                 // 문의 작성자 일련번호
     @Column() fileSn : number;                       // 첨부 파일 일련번호

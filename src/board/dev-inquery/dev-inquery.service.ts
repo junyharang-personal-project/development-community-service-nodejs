@@ -69,10 +69,6 @@ export class DevInqueryService {
 
                 if (requestRegistDevInqueryDTO.inqrySn == null || requestRegistDevInqueryDTO.inqrySn == 0) {
 
-                    const {inqrySj, inqryCn, inquryUserSn} = requestRegistDevInqueryDTO;
-
-                    this.logger.log(`등록 요청 게시글 일련번호가 비어 있습니다! 게시글 등록을 수행 합니다! ${requestRegistDevInqueryDTO.inqrySn}`);
-
                     // TODO - 회원가입 및 로그인 로직 구현 뒤 아래 하드코딩 수정 필요
                     requestRegistDevInqueryDTO.inquryUserSn = 4;
 
@@ -81,11 +77,6 @@ export class DevInqueryService {
 
                     const devInqry = await this.devInquryRepository.saveDevInqeury(requestRegistDevInqueryDTO);
 
-                    // const devInqry = this.devInquryRepository.create({inqrySj, inqryCn, inquryUserSn});
-                    //
-                    // await this.devInquryRepository.save(requestRegistDevInqueryDTO);
-
-                    // this.logger.log(`DB 저장 뒤 반환 값 출력 : ${inqrySn}`);
                     this.logger.log(`Client Reponse를 위한 result Object에 DB 응답값 중 게시글 고유번호를 넣겠습니다!`);
 
                     result.resultSn = devInqry.inqrySn;
@@ -99,7 +90,7 @@ export class DevInqueryService {
                     this.logger.log(`Client Reponse를 위한 result Object에 요청으로 들어온 게시글 일련번호를 넣겠습니다!`);
                     result.resultSn = requestRegistDevInqueryDTO.inqrySn;
 
-                }// if (CustomStringUtil.getString(requestRegistDevInqueryDTO.inqrySn) == "" || requestRegistDevInqueryDTO.inqrySn == 0) 끝
+                }   // if (CustomStringUtil.getString(requestRegistDevInqueryDTO.inqrySn) == "" || requestRegistDevInqueryDTO.inqrySn == 0) 끝
 
                 this.logger.log(`Logic이 완료 되었으므로, 200 Code를 result에 넣겠습니다!`);
                 result.code = 200;

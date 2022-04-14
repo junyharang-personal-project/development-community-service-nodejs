@@ -17,7 +17,7 @@ import {ApiCreatedResponse, ApiOperation, ApiTags} from "@nestjs/swagger";
  */
 
 @ApiTags('Q&A 게시판 API')
-@Controller('/api/support') export class DevInqueryController {
+@Controller('api/support') export class DevInqueryController {
    private logger = new Logger('dev-inquery.controller.ts');
 
    constructor(private devInqueryService : DevInqueryService) {}   // 생성자 끝
